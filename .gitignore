@@ -5,5 +5,13 @@ __pycache__/
 .streamlit/
 logs/
 *.log
+.agents/
+.ccb/
+.claude/
+.codex/
+AGENTS.md
+nul
+streamlit.out
+streamlit.err
 .DS_Store
 Thumbs.db

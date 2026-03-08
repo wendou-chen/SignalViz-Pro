@@ -149,7 +149,7 @@ fig.update_yaxes(title_text="幅度 (dB)", row=1, col=1)
 fig.update_yaxes(title_text="相位 (°)", row=2, col=1)
 
 fig.update_layout(**LAYOUT_DEFAULTS, height=680)
-st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+st.plotly_chart(fig, width="stretch", config=PLOTLY_CONFIG)
 
 
 # ──────────────────────────── 教学注释 ────────────────────────────

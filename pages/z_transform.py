@@ -216,7 +216,7 @@ fig.update_xaxes(title_text="n", row=1, col=2)
 fig.update_yaxes(title_text="h[n]", row=1, col=2)
 
 fig.update_layout(**LAYOUT_DEFAULTS, height=520)
-st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+st.plotly_chart(fig, width="stretch", config=PLOTLY_CONFIG)
 
 
 # ──────────────────────────── 教学注释 ────────────────────────────

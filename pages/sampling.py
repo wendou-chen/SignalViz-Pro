@@ -2,11 +2,16 @@
 # 对应考点：奈奎斯特采样定理、混叠现象、信号重建
 
 import numpy as np
+import streamlit as st
 from scipy.interpolate import CubicSpline
 import plotly.graph_objects as go
-import streamlit as st
 
 from utils import PLOTLY_CONFIG, LAYOUT_DEFAULTS
+
+
+COLOR_PRIMARY = "#636EFA"
+COLOR_ACCENT = "#EF553B"
+COLOR_REF = "gray"
 
 # ── 页面标题与公式 ──
 st.title("采样定理与混叠效应")
@@ -26,7 +31,11 @@ if is_aliased:
     f_alias = f_folded if f_folded <= f_s / 2 else f_s - f_folded
     st.sidebar.warning(f"混叠! 表观频率 ≈ {f_alias:.2f} Hz")
 else:
+    f_alias = f_sig
     st.sidebar.success("满足奈奎斯特准则，无混叠")
+
+st.sidebar.metric("奈奎斯特频率", f"{f_s / 2:.2f} Hz")
+st.sidebar.metric("表观频率", f"{f_alias:.2f} Hz")
 
 # ── 信号生成（向量化计算） ──
 T_max = 2.0
@@ -54,7 +63,7 @@ fig.add_trace(go.Scatter(
     x=t, y=x_cont,
     mode="lines",
     name="连续信号",
-    line=dict(color="gray", width=2),
+    line=dict(color=COLOR_REF, width=2),
 ))
 
 # Layer 2：采样点（红色散点）
@@ -62,7 +71,7 @@ fig.add_trace(go.Scatter(
     x=t_s, y=x_s,
     mode="markers",
     name="采样点",
-    marker=dict(color="red", size=8),
+    marker=dict(color=COLOR_ACCENT, size=8),
 ))
 
 # Layer 3：重建信号（蓝色虚线）
@@ -70,15 +79,12 @@ fig.add_trace(go.Scatter(
     x=t, y=x_recon,
     mode="lines",
     name="重建信号",
-    line=dict(color="blue", width=2, dash="dash"),
+    line=dict(color=COLOR_PRIMARY, width=2, dash="dash"),
 ))
 
-fig.update_layout(
-    **LAYOUT_DEFAULTS,
-    height=500,
-    xaxis_title="t (s)",
-    yaxis_title="x(t)",
-)
+fig.update_xaxes(title_text="t (s)")
+fig.update_yaxes(title_text="x(t)")
+fig.update_layout(**LAYOUT_DEFAULTS, height=500)
 
 st.plotly_chart(fig, width="stretch", config=PLOTLY_CONFIG)
 

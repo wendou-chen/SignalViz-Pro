@@ -58,13 +58,9 @@ for k in range(num_carriers):
     fig.add_vline(x=f_center, line_dash="dot", line_color="gray", opacity=0.3)
 
 # ── 图表布局 ──
-fig.update_layout(
-    **LAYOUT_DEFAULTS,
-    height=500,
-    xaxis_title="f (kHz)",
-    yaxis_title="幅度",
-    title="子载波 sinc 频谱",
-)
+fig.update_xaxes(title_text="f (kHz)")
+fig.update_yaxes(title_text="幅度")
+fig.update_layout(**LAYOUT_DEFAULTS, height=500, title="子载波 sinc 频谱")
 st.plotly_chart(fig, width="stretch", config=PLOTLY_CONFIG)
 
 # ── 教学注释 ──

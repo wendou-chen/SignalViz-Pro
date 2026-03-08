@@ -151,7 +151,7 @@ fig.update_xaxes(title_text="t (s)")
 fig.update_yaxes(title_text="幅度")
 
 fig.update_layout(**LAYOUT_DEFAULTS, height=560)
-st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+st.plotly_chart(fig, width="stretch", config=PLOTLY_CONFIG)
 
 
 # ──────────────────────────── 教学注释 ────────────────────────────
